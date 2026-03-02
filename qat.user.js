@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name        QAT
+// @name        CAT3
 // @namespace   https://official-tickets.roadtoqatar.qa/
-// @version     1.6.8
+// @version     1.6.9
 // @description 409 → retry/random 
 // @author      MHDM
 // @match       https://official-tickets.roadtoqatar.qa/*
@@ -123,7 +123,7 @@
       log(`Failed ${result.status}`, result.data?.code || '');
 
       if (result.status === 403) {
-        const wait = 8000 + Math.random() * 7000; // 8–15s
+        const wait = 8000 + Math.random() * 7000;
         log(`403 detected → waiting ${Math.round(wait/1000)}s before reload & auto-continue`);
         await delay(wait);
         log('Reloading page...');
@@ -132,7 +132,7 @@
       }
 
       if (result.status === 409 && result.data?.code === 'ORDER_SEAT_NOT_AVAILABLE') {
-        const wait = 8000 + Math.random() * 7000; // 8–15s
+        const wait = 8000 + Math.random() * 7000;
         log(`409 → retry in ${Math.round(wait/1000)}s`);
         setTimeout(tryAddToCart, wait);
         return;
@@ -175,7 +175,7 @@
 
     const logPanel = document.createElement('div');
     logPanel.id = 'cat3-log';
-    logPanel.style.cssText = 'position:fixed;bottom:70px;right:20px;width:380px;max-height:260px;overflow-y:auto;background:#000;color:#0f0;padding:10px;border:1px solid #333;border-radius:6px;font-family:monospace;font-size:13px;white-space:pre-wrap;z-index:99998;display:none;';
+    logPanel.style.cssText = 'position:fixed;bottom:70px;right:20px;width:380px;max-height:260px;overflow-y:auto;background:#000;color:#0f0;padding:10px;border:1px solid #333;border-radius:6px;font-family:monospace;font-size:13px;white-space:pre-wrap;z-index:99998;';
     document.body.appendChild(logPanel);
 
     const originalLog = console.log;
@@ -199,11 +199,15 @@
 
   function init() {
     injectUI();
+
+    // Always show log box on load/refresh
+    const logPanel = document.getElementById('cat3-log');
+    if (logPanel) logPanel.style.display = 'block';
+
     GM_registerMenuCommand?.('CAT3 Auto-Retry', tryAddToCart);
 
     if (location.pathname.startsWith(AUTO_START_PATH)) {
       log('Auto-start in 2s');
-      document.getElementById('cat3-log').style.display = 'block';
       setTimeout(tryAddToCart, 2000);
     }
 
