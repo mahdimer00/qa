@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        RoadToQatar CAT3 Direct Cart + Auto-Retry + Log + 403 Loop with Random Delay + Success Sound
+// @name        RoadToQatar QAR BOT
 // @namespace   https://official-tickets.roadtoqatar.qa/
 // @version     1.6.7
 // @description QAR BOT
