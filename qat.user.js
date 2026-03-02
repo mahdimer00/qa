@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        CAT 2
+// @name        CAT 3
 // @namespace   https://official-tickets.roadtoqatar.qa/
 // @version     1.6.8
-// @description CAT 3
-// @author      MHDM
+// @description 409 → retry/random | 403 → wait random → reload → auto-continue
+// @author      Codex
 // @match       https://official-tickets.roadtoqatar.qa/*
 // @grant       GM_registerMenuCommand
 // @run-at      document-idle
