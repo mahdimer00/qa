@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name        CAT 3
+// @name        QAT
 // @namespace   https://official-tickets.roadtoqatar.qa/
 // @version     1.6.8
-// @description 409 → retry/random | 403 → wait random → reload → auto-continue
-// @author      Codex
+// @description 409 → retry/random 
+// @author      MHDM
 // @match       https://official-tickets.roadtoqatar.qa/*
 // @grant       GM_registerMenuCommand
 // @run-at      document-idle
@@ -124,10 +124,10 @@
 
       if (result.status === 403) {
         const wait = 8000 + Math.random() * 7000; // 8–15s
-        log(`403 → waiting ${Math.round(wait/1000)}s → reload`);
+        log(`403 detected → waiting ${Math.round(wait/1000)}s before reload & auto-continue`);
         await delay(wait);
-        log('Reloading...');
-        location.reload(); // page reloads → init() runs again → auto-restart
+        log('Reloading page...');
+        location.reload();
         return;
       }
 
@@ -203,6 +203,7 @@
 
     if (location.pathname.startsWith(AUTO_START_PATH)) {
       log('Auto-start in 2s');
+      document.getElementById('cat3-log').style.display = 'block';
       setTimeout(tryAddToCart, 2000);
     }
 
