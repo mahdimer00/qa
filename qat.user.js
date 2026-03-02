@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name        RoadToQatar QAR BOT
+// @name        CAT 2
 // @namespace   https://official-tickets.roadtoqatar.qa/
-// @version     1.6.7
-// @description QAR BOT
+// @version     1.6.8
+// @description CAT 3
 // @author      MHDM
 // @match       https://official-tickets.roadtoqatar.qa/*
 // @grant       GM_registerMenuCommand
@@ -124,10 +124,10 @@
 
       if (result.status === 403) {
         const wait = 8000 + Math.random() * 7000; // 8–15s
-        log(`403 detected → waiting ${Math.round(wait/1000)}s before reload`);
+        log(`403 → waiting ${Math.round(wait/1000)}s → reload`);
         await delay(wait);
-        log('Reloading page...');
-        location.reload();
+        log('Reloading...');
+        location.reload(); // page reloads → init() runs again → auto-restart
         return;
       }
 
